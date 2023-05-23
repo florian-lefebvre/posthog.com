@@ -1,27 +1,29 @@
-> **Note: ** This is a paid feature and is not available on the open source or free cloud plan. See our [pricing page](/pricing) for more.
+> **Note: ** This feature is only available on our paid plan. See our [pricing page](/pricing) for more.
 
-**Groups** are a powerful feature in PostHog that aggregate events based on entities. They enable you to track trends, insights, and dashboards at an entity-level – as opposed to regular events, which only show you insights on a user-level.
+**Groups** are a powerful feature in PostHog that aggregate events based on entities, such as organizations or companies. They enable you to analyze trends, insights, and dashboards at an entity-level, as opposed to a user-level.```
 
 To clarify what we mean, let's look at a few examples:
 
-1. For B2B SaaS apps, you can create a *company* group type to aggregate events at a company-level. This enables you to calculate metrics such as `number of daily active companies`, `company churn rate`, or `how many companies have adopted a new feature`.
+1. For B2B SaaS apps, you can create a **company** group type. This enables you to aggregate events at a company-level, and calculate metrics such as `number of daily active companies`, `company churn rate`, or `how many companies have adopted a new feature`.```
 
-2. For a communication app like Slack, grouping events at a channel-level enables you to measure metrics like `average number of messages per channel`, `number of monthly active channels`, or `total number of channel participants`.
+2. For collaborative, project-based apps like Notion, Jira, or Figma, you can create a **project** group type. This enables you to calculate metrics like `project pageviews`, `users per project`, and `project engagement`.
 
-3. For a social media app like Twitter, events can be grouped at a tweet-level – enabling you to measure `average number of replies per tweet`, or `total count of unique tweeters per month`.
+3. For a communication app like Slack, you can create a **channel** group type. This enables you to measure metrics like `average number of messages per channel`, `number of monthly active channels`, or `total number of channel participants`.
+
+4. For a social media app like Twitter, you can create a **post** group type. This enables you to measure `average number of replies per post`, or `total count of unique posters per month`.
 
 > Groups are often confused with [cohorts](/docs/data/cohorts), but they each serve different purposes:
 >
-> * Groups aggregate events, and do not necessarily have to be connected to a user.
-> * Cohorts represent a specific set of users – e.g., a list of users that all belong to the same company.
+> - Groups aggregate events, and do not necessarily have to be connected to a user.
+> - Cohorts represent a specific set of users – e.g., a list of users that all belong to the same company.
 > 
-> Cohorts are easier to use and quicker to get started, whereas groups are more powerful. If your only goal is to create a list of **users** with something in common, we recommond cohorts instead of groups..
+> Groups require additional code in your app to set up, while cohorts are created in PostHog and don't require additional code. This makes cohorts easier to use and quicker to get started. If your only goal is to create a list of **users** with something in common, we recommend cohorts instead of groups.```
 
 ## How to create groups
 
 Groups are created and defined in your code when sending events. 
 
-In the example below, we create a group type `company`. Then, for each company, we set the `group key` as the unique identifier for that specifc company. This can be anything that helps you identify it, such as ID or domain.
+In the example below, we create a group type `company`. Then, for each company, we set the `group key` as the unique identifier for that specific company. This can be anything that helps you identify it, such as ID or domain.
 
 > We advise against using the _name_ of the company (or any other group) as the key, because that's rarely guaranteed to be unique, and thus can affect the quality of analytics data.
 
@@ -76,10 +78,10 @@ analytics.track('user_signed_up', {
 
 We now have one `company`-type group with a key `company_id_in_your_db`. When we send the event `user_signed_up`, it will be attached to this newly created group.
 
-Note that a single event can only belong to a single group per group type. To elaborate on what we mean, we'll continue using the example above:
+A single event can only belong to a single group per group type. To elaborate what we mean, we'll continue using the example above:
 
 * It is **NOT** possible to assign the a single `user_signed_up` event to two companies at the same time.
-* It is possible to assign this event to a different group type, for example `channel` or `tweet`, in addition to the `company` group type.
+* It is possible to assign this event to a different group type, for example `channel` or `post`, in addition to the `company` group type.
 
 <MultiLanguage>
 
@@ -151,8 +153,6 @@ PostHog::capture(array(
 ```
 </MultiLanguage>
 
-
-
 > **Group type limit:** There's a hard limit of 5 group types within PostHog, although within each group type you can have an unlimited number of groups.
 
 ### Setting and updating group properties
@@ -161,7 +161,7 @@ In the same way that every user can have [properties](/docs/getting-started/user
 
 Continuing with the previous example of using `company` as our group type, we'll add `company_name`, `date_joined`, and `user_count` as additional properties.
 
-> **Note:** You must include at least one group property for a group to be visible in the "Persons & Groups" tab
+> **Note:** You must include at least one group property for a group to be visible in the "Persons & Groups" tab.
 
 <MultiLanguage>
 
@@ -222,7 +222,7 @@ analytics.group('company_id_in_your_db', {
 
 </MultiLanguage>
 
-Properties on groups behave in the exact same way as properties on [persons](/docs/data/persons). They can also be used within experiments and feature flags to rollout features to specific groups.
+Properties on groups behave in the same way as properties on [persons](/docs/data/persons). They can also be used within experiments and feature flags to rollout features to specific groups.
 
 > **Note:** The PostHog UI identifies a group using the `name` property. If the `name` property is not found, it falls back to the group key.
 
@@ -236,7 +236,7 @@ Now that we have created our first group type, we can take a look at how to use 
 
 To view groups and their properties, head to the "Persons and Groups" tab on the navigation bar.
 
-From here you can select the group type you are interested in and view the groups and properties (by clicking the chevrons on the left).
+From here, you can select the group type you are interested in and view the groups and properties (by clicking the chevrons on the left).
 
 ![View Groups](../../images/docs/user-guides/funnels/view-groups.png)
 
@@ -245,11 +245,12 @@ You can also click on a specific group to see information such as all the events
 ![View related people and groups](../../images/docs/user-guides/funnels/related-people-and-groups.png)
 
 ### How to view group insights
+
 You can use groups in [insights](/docs/product-analytics/insights) to view aggregated events based on group type.
 
 For example, let's say that we wanted to see a graph showing how many different organizations have signed up recently:
 
-To do this, expand the menu next to the event you've chosen. This will a list of all the group types you have available. Then, by selecting "Unique organizations", this will show us a graph with the total number of organizations that have signed up (as opposed to individual users).
+To do this, expand the menu next to the event you've chosen. This lists of all the group types available. Next, select the option for "Unique" with your group type name, such as "Unique organizations." This shows a graph with the total number of groups (organizations) that have signed up (as opposed to individual users).
 
 ![Analyze group insights](../../images/docs/user-guides/funnels/group-insights.mp4)
 
@@ -257,9 +258,9 @@ To do this, expand the menu next to the event you've chosen. This will a list of
 
 Another place where group analytics can be used is within funnels.
 
-For example, you may want to understand how an organization moves from their first visit to eventually signing up. Yo can do this by setting the 'Aggregating by' field to 'Unique organizations'.
+For example, you may want to understand how organizations move from their first visit to eventually signing up. You can do this by setting the "Aggregating by" field to "Unique organizations."
 
-This will show how many organizations have made it through, as well as the percentage of organizations that dropped off. It's also possible to see exactly which specifc groups dropped off at each step.
+This shows how many organizations have made it through, as well as the percentage of organizations that dropped off. It's also possible to see exactly which specific groups dropped off at each step.
 
 ![Group funnels](../../images/docs/user-guides/funnels/funnels-group-aggregation.png)
 
@@ -267,11 +268,11 @@ This will show how many organizations have made it through, as well as the perce
 
 Groups in feature flags enable you to rollout a feature by group type (like `company`), instead of users.
 
-To do this, create a feature flag as you normally would, except you need to select the group type you wish to "Match by", using the drop down in the "Release conditions" section:
+To do this, create a feature flag as you normally would, and select the group type you wish to "Match by", using the drop down in the "Release conditions" section:
 
 ![Groups in project settings](../../images/docs/user-guides/funnels/groups-in-feature-flags.mp4)
 
-You will also need to update your event tracking code in order for the feature flag to be able to determine the groups of the current user.
+You also need to update your event tracking code for the feature flag to determine the groups of the current user.
 
 <MultiLanguage>
 
@@ -306,7 +307,7 @@ if (isFlagEnabled) {
 
 ### Renaming group types
 
-You can change how group types are displayed in your Insights interface and throughout PostHog by using the Project settings.
+You can change how group types are displayed in the insights interface and throughout PostHog by in project settings.
 
 ![Groups in project settings](../../images/docs/user-guides/funnels/groups-project-settings.png)
 
@@ -317,9 +318,9 @@ You can change how group types are displayed in your Insights interface and thro
 -   Multiple groups of the same type cannot assigned to a single event (e.g., Company A & Company B).
 -   Groups are not currently supported for the following insights:
     -   Lifecycle - Expected soon.
-    -   User Paths - These only support user level analytics.
+    -   User paths - These only support user level analytics.
 -   Only groups with known properties are shown under 'Persons & groups'.
--   Currently there is no functionality within the app to delete groups. If you'd like to delete a group, please [contact customer support](/growth/customer-support#we-aim-to-delight).
+-   Currently there is no functionality within the app to delete groups. If you need to delete a group for privacy or security reasons, please [use the support modal](https://app.posthog.com/home#supportModal=support%3Adata_management).```
 
 ## Further reading
 
