@@ -35,7 +35,7 @@
                 "url": "/docs/getting-started/actions-and-insights"
             },
             {
-                "name": "Groups",
+                "name": "Group analytics",
                 "url": "/docs/getting-started/group-analytics"
             },
             {
@@ -243,7 +243,7 @@
                 "url": "/docs/api/funnel"
             },
             {
-                "name": "Groups",
+                "name": "Group analytics",
                 "url": "/docs/api/groups"
             },
             {
@@ -391,7 +391,7 @@
                 "url": "/docs/product-analytics/funnels"
             },
             {
-                "name": "Groups",
+                "name": "Group analytics",
                 "url": "/docs/product-analytics/group-analytics"
             },
             {
@@ -1266,7 +1266,7 @@
                 "url": "/tutorials/categories/funnels"
             },
             {
-                "name": "Groups",
+                "name": "Group analytics",
                 "url": "/tutorials/categories/group-analytics"
             },
             {
