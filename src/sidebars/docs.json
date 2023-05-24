@@ -35,7 +35,7 @@
                 "url": "/docs/getting-started/actions-and-insights"
             },
             {
-                "name": "Group analytics",
+                "name": "Groups",
                 "url": "/docs/getting-started/group-analytics"
             },
             {
@@ -391,7 +391,7 @@
                 "url": "/docs/product-analytics/funnels"
             },
             {
-                "name": "Group analytics",
+                "name": "Groups",
                 "url": "/docs/product-analytics/group-analytics"
             },
             {
@@ -1266,7 +1266,7 @@
                 "url": "/tutorials/categories/funnels"
             },
             {
-                "name": "Group analytics",
+                "name": "Groups",
                 "url": "/tutorials/categories/group-analytics"
             },
             {
